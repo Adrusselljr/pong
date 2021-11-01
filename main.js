@@ -1,30 +1,94 @@
 // Size of the game area (in px)
-const GAME_AREA_WIDTH = 700;
-const GAME_AREA_HEIGHT = 500;
+const GAME_AREA_WIDTH = 700
+const GAME_AREA_HEIGHT = 500
 
 // Size of the paddles (in px)
-const PADDLE_HEIGHT = 100;
-const PADDLE_WIDTH = 20;
+const PADDLE_HEIGHT = 100
+const PADDLE_WIDTH = 20
 
 // Size of the ball (in px)
-const BALL_SIZE = 20;
+const BALL_SIZE = 20
 
-// Get the computer paddle element
-const computerPaddle = document.querySelector('.computer-paddle');
+// Get random velocity
+const random = () => {
+    let num = [3, 4, 5, 6, 7]
+    return num[Math.ceil(Math.random() * num.length - 1)]
+}
 
-// The y-velocity of the computer paddle
-let computerPaddleYPosition = 0;
-let computerPaddleYVelocity = 1;
+// Get the elements
+const computerPaddle = document.querySelector('.computer-paddle')
+const playerPaddle = document.querySelector(".player-paddle")
+const ball = document.querySelector(".ball")
+
+// The computer paddle start position / velocity
+let computerPaddleYPosition = 200
+let computerPaddleYVelocity = 3
+
+// The player paddle start position / velocity
+let playerPaddleYPosition = 200
+let playerPaddleYVelocity = 0
 
 // Update the pong world
+
+let xPosition = 350
+let yPosition = 250
+let xVelocity = random()
+let yVelocity = random()
+
 function update() {
 
-    // Update the computer paddle's position
-    computerPaddleYPosition = computerPaddleYPosition + computerPaddleYVelocity;
+    // Update the ball's position
+    yPosition -= yVelocity
+    ball.style.top = `${yPosition}px`
+    xPosition -= xVelocity
+    ball.style.left = `${xPosition}px`
 
-    // Apply the y-position 
-    computerPaddle.style.top = `${computerPaddleYPosition}px`;
+    // Ball hits bottom border
+    if(yPosition > 480) {
+        yPosition = 480
+        yVelocity = random()
+    }
+
+    // Ball hits right border
+    if(xPosition > 680) {
+        xPosition = 680
+        xVelocity = random()
+    }
+
+    // Ball hits top border
+    if(yPosition < 0) {
+        yPosition = 0
+        yVelocity = -random()
+    }
+
+    // Ball hits left border
+    if(xPosition < 0) {
+        xPosition = 0
+        xVelocity = -random()
+    }
+
+    // Ball hits computer paddle
+    
+
+    // Update the computer paddle's position
+    computerPaddleYPosition += computerPaddleYVelocity
+
+    if(computerPaddleYPosition > 400) {
+        computerPaddleYPosition = 400
+        computerPaddleYVelocity = -random()
+    }
+    if(computerPaddleYPosition < 0) {
+        computerPaddleYPosition = 0
+        computerPaddleYVelocity = random()
+    }
+
+    // Update the player paddle's position
+    playerPaddleYPosition += playerPaddleYVelocity
+
+    // Apply the paddle's y-position 
+    computerPaddle.style.top = `${computerPaddleYPosition}px`
+    playerPaddle.style.top = `${playerPaddleYPosition}px`
 }
 
 // Call the update() function every 35ms
-setInterval(update, 35);
+setInterval(update, 35)
