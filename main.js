@@ -36,7 +36,7 @@ const computerScore = document.querySelector(".computerScore")
 // The computer paddle start position / velocity
 let computerPaddleYPosition = 200
 let computerPaddleYVelocity = 3
-let computerPaddleXPosition = 685
+let computerPaddleXPosition = 679
 
 // The player paddle start position / velocity
 let playerPaddleYPosition = 200
