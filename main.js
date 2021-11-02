@@ -95,8 +95,8 @@ function update() {
     ball.style.left = `${xPosition}px`
 
     // Ball hits bottom border
-    if(yPosition > 480) {
-        yPosition = 480
+    if(yPosition > 485) {
+        yPosition = 485
         if(difficulty === "hard") {
             yVelocity = 12
         }
@@ -106,7 +106,7 @@ function update() {
     }
 
     // Ball hits right border
-    if(xPosition > 680) {
+    if(xPosition > 685) {
         // xPosition = 680
         // xVelocity = randomV()
         playerCount++
@@ -115,8 +115,8 @@ function update() {
     }
 
     // Ball hits top border
-    if(yPosition < 0) {
-        yPosition = 0
+    if(yPosition < 6) {
+        yPosition = 6
         if(difficulty === "hard") {
             yVelocity = -12
         }
@@ -126,7 +126,7 @@ function update() {
     }
 
     // Ball hits left border
-    if(xPosition < 0) {
+    if(xPosition < 7) {
         // xPosition = 0
         // xVelocity = -randomV()
         computerCount++
