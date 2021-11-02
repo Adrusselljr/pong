@@ -16,15 +16,15 @@ body {
 
 .ball {
     background-color: white;
-    height: 20px;
-    width: 20px;
+    height: 10px;
+    width: 10px;
     position: absolute;
     top: 0;
     left: 0;
 }
 
 .paddle {
-    width: 20px;
+    width: 5px;
     height: 100px;
     top: 100px;
     position: absolute;
@@ -33,9 +33,28 @@ body {
 
 .player-paddle {
     left: 0;
+    margin-left: 10px;
 }
 
 .computer-paddle {
     right: 0;
+    margin-right: 10px;
 }
 
+.net {
+    width: 5px;
+    height: 400px;
+    background-color: white;
+    margin-left: 345px;
+    margin-top: 15px;
+}
+
+#scoreParent {
+    display: flex;
+    justify-content: space-around;
+}
+
+.playerScore, .computerScore {
+    color: white;
+    font-size: xx-large;
+}

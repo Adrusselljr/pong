@@ -19,6 +19,8 @@ const random = () => {
 const computerPaddle = document.querySelector('.computer-paddle')
 const playerPaddle = document.querySelector(".player-paddle")
 const ball = document.querySelector(".ball")
+const playerScore = document.querySelector(".playerScore")
+const computerScore = document.querySelector(".computerScore")
 
 // The computer paddle start position / velocity
 let computerPaddleYPosition = 200
@@ -30,10 +32,31 @@ let playerPaddleYVelocity = 0
 
 // Update the pong world
 
-let xPosition = 350
-let yPosition = 250
-let xVelocity = random()
-let yVelocity = random()
+let xPosition
+let yPosition
+let xVelocity
+let yVelocity
+
+let playerCount = 0
+let computerCount = 0
+
+playerScore.innerText = playerCount
+computerScore.innerText = computerCount
+
+const reset = () => {
+
+    xPosition = 350
+    yPosition = 250
+    xVelocity = random()
+    yVelocity = random()
+
+    if(playerCount === 20 || computerCount === 20) {
+        playerCount = 0
+        computerCount = 0
+    }
+    
+}
+reset()
 
 function update() {
 
@@ -51,8 +74,10 @@ function update() {
 
     // Ball hits right border
     if(xPosition > 680) {
-        xPosition = 680
-        xVelocity = random()
+        // xPosition = 680
+        // xVelocity = random()
+        playerScore.innerText = playerCount++
+        reset()
     }
 
     // Ball hits top border
@@ -63,12 +88,13 @@ function update() {
 
     // Ball hits left border
     if(xPosition < 0) {
-        xPosition = 0
-        xVelocity = -random()
+        // xPosition = 0
+        // xVelocity = -random()
+        computerScore.innerText = computerCount++
+        reset()
     }
 
     // Ball hits computer paddle
-    
 
     // Update the computer paddle's position
     computerPaddleYPosition += computerPaddleYVelocity
