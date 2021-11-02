@@ -104,7 +104,8 @@ function update() {
     if(xPosition > 680) {
         // xPosition = 680
         // xVelocity = randomV()
-        playerScore.innerText = playerCount++
+        playerCount++
+        playerScore.innerText = playerCount
         reset()
     }
 
@@ -118,7 +119,8 @@ function update() {
     if(xPosition < 0) {
         // xPosition = 0
         // xVelocity = -randomV()
-        computerScore.innerText = computerCount++
+        computerCount++
+        computerScore.innerText = computerCount
         reset()
     }
 
@@ -180,7 +182,6 @@ setInterval(update, 35)
 
 // Event listener for key down
 document.addEventListener("keydown", function (e) {
-    console.log(e.key)
     if(e.key === "ArrowUp") {
         playerPaddleYVelocity = -6
     }
