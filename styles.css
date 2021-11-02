@@ -58,3 +58,29 @@ body {
     color: white;
     font-size: xx-large;
 }
+
+#parent {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: white;
+    font-size: xx-large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h5 {
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+a {
+    color: white;
+    width: 50px;
+    padding-left: 20px;
+    border: 1px solid white;
+    text-decoration: none;
+}
