@@ -97,7 +97,12 @@ function update() {
     // Ball hits bottom border
     if(yPosition > 480) {
         yPosition = 480
-        yVelocity = randomV()
+        if(difficulty === "hard") {
+            yVelocity = 12
+        }
+        else {
+            yVelocity = randomV()
+        }
     }
 
     // Ball hits right border
@@ -112,7 +117,12 @@ function update() {
     // Ball hits top border
     if(yPosition < 0) {
         yPosition = 0
-        yVelocity = -randomV()
+        if(difficulty === "hard") {
+            yVelocity = -12
+        }
+        else {
+            yVelocity = -randomV()
+        }
     }
 
     // Ball hits left border
@@ -144,11 +154,11 @@ function update() {
     }
 
     // Update the computer paddle's position
-    if(difficulty === "easy") {
-        computerPaddleYPosition += computerPaddleYVelocity
+    if(difficulty === "hard") {
+        computerPaddleYPosition = yPosition
     }
     else {
-        computerPaddleYPosition = yPosition
+        computerPaddleYPosition += computerPaddleYVelocity
     }
 
     if(computerPaddleYPosition > 400) {
