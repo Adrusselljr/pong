@@ -25,10 +25,12 @@ const computerScore = document.querySelector(".computerScore")
 // The computer paddle start position / velocity
 let computerPaddleYPosition = 200
 let computerPaddleYVelocity = 3
+let computerPaddleXPosition = 685
 
 // The player paddle start position / velocity
 let playerPaddleYPosition = 200
 let playerPaddleYVelocity = 0
+let playerPaddleXPosition = 25
 
 // Update the pong world
 
@@ -54,7 +56,7 @@ const reset = () => {
         playerCount = 0
         computerCount = 0
     }
-    
+
 }
 reset()
 
@@ -95,6 +97,23 @@ function update() {
     }
 
     // Ball hits computer paddle
+    if(yPosition + 10 >= computerPaddleYPosition &&
+        yPosition <= computerPaddleYPosition + 100 &&
+        xPosition + 10 >= computerPaddleXPosition
+    ) {
+        yVelocity *= -1
+        xVelocity *= -1
+    }
+
+
+    // Ball hits player paddle
+    if(yPosition + 10 >= playerPaddleYPosition &&
+        yPosition <= playerPaddleYPosition + 100 &&
+        xPosition + 10 <= playerPaddleXPosition
+    ) {
+        yVelocity *= -1
+        xVelocity *= -1
+    }
 
     // Update the computer paddle's position
     computerPaddleYPosition += computerPaddleYVelocity
@@ -109,12 +128,32 @@ function update() {
     }
 
     // Update the player paddle's position
+    if(playerPaddleYPosition > 400) {
+        playerPaddleYPosition = 397
+    }
+    if(playerPaddleYPosition < 0) {
+        playerPaddleYPosition = 3
+    }
+
+    // Update the player paddle's position
     playerPaddleYPosition += playerPaddleYVelocity
 
     // Apply the paddle's y-position 
     computerPaddle.style.top = `${computerPaddleYPosition}px`
     playerPaddle.style.top = `${playerPaddleYPosition}px`
+
 }
 
 // Call the update() function every 35ms
 setInterval(update, 35)
+
+// Event listener for key down
+document.addEventListener("keydown", function (e) {
+    console.log(e.key)
+    if(e.key === "ArrowUp") {
+        playerPaddleYVelocity = -6
+    }
+    else if(e.key === "ArrowDown") {
+        playerPaddleYVelocity = 6
+    }
+})
