@@ -1,3 +1,9 @@
+// Set Query Params
+const urlSearchParams = new URLSearchParams(window.location.search)
+const params = Object.fromEntries(urlSearchParams.entries())
+
+const difficulty = params.difficulty
+
 // Size of the game area (in px)
 const GAME_AREA_WIDTH = 700
 const GAME_AREA_HEIGHT = 500
@@ -10,9 +16,14 @@ const PADDLE_WIDTH = 20
 const BALL_SIZE = 20
 
 // Get random velocity
-const random = () => {
+const randomV = () => {
     let num = [3, 4, 5, 6, 7]
     return num[Math.ceil(Math.random() * num.length - 1)]
+}
+
+const randomSign = () => {
+    let sign = [0, 1, 2, 3]
+    return sign[Math.ceil(Math.random() * sign.length - 1)]
 }
 
 // Get the elements
@@ -49,9 +60,24 @@ const reset = () => {
 
     xPosition = 350
     yPosition = 250
-    xVelocity = random()
-    yVelocity = random()
 
+    if(randomSign() === 1) {
+        xVelocity = -randomV()
+        yVelocity = -randomV()
+    }
+    else if(randomSign() === 2) {
+        xVelocity = -randomV()
+        yVelocity = randomV()
+    }
+    else if(randomSign() === 3) {
+        xVelocity = randomV()
+        yVelocity = -randomV()
+    }
+    else {
+        xVelocity = randomV()
+        yVelocity = randomV()
+    }
+    
     if(playerCount === 20 || computerCount === 20) {
         playerCount = 0
         computerCount = 0
@@ -71,13 +97,13 @@ function update() {
     // Ball hits bottom border
     if(yPosition > 480) {
         yPosition = 480
-        yVelocity = random()
+        yVelocity = randomV()
     }
 
     // Ball hits right border
     if(xPosition > 680) {
         // xPosition = 680
-        // xVelocity = random()
+        // xVelocity = randomV()
         playerScore.innerText = playerCount++
         reset()
     }
@@ -85,13 +111,13 @@ function update() {
     // Ball hits top border
     if(yPosition < 0) {
         yPosition = 0
-        yVelocity = -random()
+        yVelocity = -randomV()
     }
 
     // Ball hits left border
     if(xPosition < 0) {
         // xPosition = 0
-        // xVelocity = -random()
+        // xVelocity = -randomV()
         computerScore.innerText = computerCount++
         reset()
     }
@@ -116,15 +142,20 @@ function update() {
     }
 
     // Update the computer paddle's position
-    computerPaddleYPosition = yPosition
+    if(difficulty === "easy") {
+        computerPaddleYPosition += computerPaddleYVelocity
+    }
+    else {
+        computerPaddleYPosition = yPosition
+    }
 
     if(computerPaddleYPosition > 400) {
         computerPaddleYPosition = 400
-        computerPaddleYVelocity = -random()
+        computerPaddleYVelocity = -randomV()
     }
     if(computerPaddleYPosition < 0) {
         computerPaddleYPosition = 0
-        computerPaddleYVelocity = random()
+        computerPaddleYVelocity = randomV()
     }
 
     // Update the player paddle's position
