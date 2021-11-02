@@ -154,6 +154,7 @@ function update() {
     }
 
     // Update the computer paddle's position
+
     if(difficulty === "hard") {
         computerPaddleYPosition = yPosition
     }
@@ -161,21 +162,26 @@ function update() {
         computerPaddleYPosition += computerPaddleYVelocity
     }
 
+    // BOTTOM
     if(computerPaddleYPosition > 400) {
         computerPaddleYPosition = 400
         computerPaddleYVelocity = -randomV()
     }
+    // TOP
     if(computerPaddleYPosition < 0) {
         computerPaddleYPosition = 0
         computerPaddleYVelocity = randomV()
     }
 
     // Update the player paddle's position
-    if(playerPaddleYPosition > 400) {
-        playerPaddleYPosition = 397
+
+    // BOTTOM
+    if(playerPaddleYPosition > 397) {
+        playerPaddleYPosition = 393
     }
-    if(playerPaddleYPosition < 0) {
-        playerPaddleYPosition = 3
+    // TOP
+    if(playerPaddleYPosition < 3) {
+        playerPaddleYPosition = 6
     }
 
     // Update the player paddle's position
