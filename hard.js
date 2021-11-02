@@ -116,7 +116,7 @@ function update() {
     }
 
     // Update the computer paddle's position
-    computerPaddleYPosition += computerPaddleYVelocity
+    computerPaddleYPosition = yPosition
 
     if(computerPaddleYPosition > 400) {
         computerPaddleYPosition = 400
